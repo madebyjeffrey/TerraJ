@@ -64,8 +64,7 @@ import com.alvermont.terraj.fracplanet.io.JarLibraryLoader;
 import com.alvermont.terraj.fracplanet.render.TriangleMeshViewerDisplay;
 import com.alvermont.terraj.stargen.util.MathUtils;
 import com.meghnasoft.async.AbstractAsynchronousAction;
-import com.sun.opengl.impl.NativeLibLoader;
-import com.sun.opengl.util.FPSAnimator;
+import com.jogamp.opengl.util.FPSAnimator;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -73,8 +72,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.media.opengl.GLCanvas;
+import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.GLCapabilities;
+import javax.media.opengl.GLProfile;
 import javax.swing.ToolTipManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -82,12 +82,14 @@ import org.apache.commons.logging.LogFactory;
 /**
  * An implementation of the terrain viewer.
  *
- * @author  martin
+ * @author martin
  * @version $Id: TerrainViewerFrame.java,v 1.17 2006/07/06 06:58:34 martin Exp $
  */
-public class TerrainViewerFrame extends AbstractTerrainViewerFrame
-{
-    /** Our logger object */
+public class TerrainViewerFrame extends AbstractTerrainViewerFrame {
+
+    /**
+     * Our logger object
+     */
     private static Log log = LogFactory.getLog(TerrainViewerFrame.class);
     private FPSAnimator anim;
     private TriangleMeshViewerDisplay tmvd;
@@ -95,32 +97,34 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
     private GLCanvas canvas;
     private MeshStats stats = new MeshStats();
 
-    /** Creates a new instance of TerrainViewerFrame */
-    public TerrainViewerFrame()
-    {
+    /**
+     * Creates a new instance of TerrainViewerFrame
+     */
+    public TerrainViewerFrame() {
     }
 
-    /** An asynchronous action class to carry out terrain regeneration */
-    private class RegenAction extends AbstractAsynchronousAction
-    {
+    /**
+     * An asynchronous action class to carry out terrain regeneration
+     */
+    private class RegenAction extends AbstractAsynchronousAction {
+
         /**
          * Creates a new instance of RegenAction
          *
          * @param name The name of the action
          */
-        public RegenAction(String name)
-        {
+        public RegenAction(String name) {
             super(name);
         }
 
         /**
          * Called to carry out the work of the action
          *
-         * @param e The ActionEvent associated with the triggering of this action
+         * @param e The ActionEvent associated with the triggering of this
+         * action
          * @return The object that is the result of this action
          */
-        public Object asynchronousActionPerformed(ActionEvent e)
-        {
+        public Object asynchronousActionPerformed(ActionEvent e) {
             regenerate();
 
             return this;
@@ -129,47 +133,43 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
         /**
          * Called when the action has completed
          */
-        public void finished()
-        {
+        public void finished() {
         }
     }
 
     /**
      * Called to initialize the display being managed by this object
      */
-    public void initialize()
-    {
+    public void initialize() {
         final MathUtils utils =
-            new MathUtils(
+                new MathUtils(
                 new Random(
-                    getAllParams().getTerrainParameters().getTerrainSeed()));
+                getAllParams().getTerrainParameters().getTerrainSeed()));
 
         this.pd = new ProgressDialog(this, false);
 
         // disable lightweight menus so they don't appear behind the GL canvas
         ToolTipManager.sharedInstance()
-            .setLightWeightPopupEnabled(false);
-
-        try
-        {
+                .setLightWeightPopupEnabled(false);
+/* // zzing 24 Feb 2013  We don't need this with JOGL 2
+        try {
             JarLibraryLoader.setupPath();
 
             JarLibraryLoader.extractLibrary("jogl");
             JarLibraryLoader.extractLibrary("jogl_awt");
             JarLibraryLoader.extractLibrary("jogl_cg");
             JarLibraryLoader.extractLibrary("jogl_drihack");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("Failed to load native libraries from jar file", e);
         }
-        
-        try
-        {
-            this.canvas = new GLCanvas(new GLCapabilities());
-        }
-        catch (Throwable e)
-        {
+*/
+        try {
+//            this.canvas = new GLCanvas(new GLCapabilities(GLProfile.getDefault()));
+            GLProfile glprofile = GLProfile.getDefault();
+            GLCapabilities glcapabilities = new GLCapabilities( glprofile );
+            final GLCanvas glcanvas = new GLCanvas( glcapabilities );
+            this.canvas = glcanvas;
+        } catch (Throwable e) {
             // this is fatal
             e.printStackTrace();
 
@@ -194,10 +194,8 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
     /**
      * Called when the terrain is to be regenerated
      */
-    public void regenerate()
-    {
-        if (this.anim.isAnimating())
-        {
+    public void regenerate() {
+        if (this.anim.isAnimating()) {
             this.anim.stop();
         }
 
@@ -216,12 +214,9 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
         this.pd.setVisible(true);
 
         // create the new terrain
-        if (tp.getObjectType() == TerrainParameters.ObjectTypeEnum.PLANET)
-        {
+        if (tp.getObjectType() == TerrainParameters.ObjectTypeEnum.PLANET) {
             terrain = new TriangleMeshTerrainPlanet(tp, this.pd, utils);
-        }
-        else
-        {
+        } else {
             terrain = new TriangleMeshTerrainFlat(tp, this.pd, utils);
         }
 
@@ -240,22 +235,18 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
 
         meshes.add(terrain);
 
-        if (cp.isEnabled())
-        {
+        if (cp.isEnabled()) {
             TriangleMesh cloudMesh = null;
 
-            switch (tp.getObjectType())
-            {
-                case PLANET:
-                {
+            switch (tp.getObjectType()) {
+                case PLANET: {
                     cloudMesh = new TriangleMeshCloudPlanet(
                             pd, terrain.getGeometry(), tp, cp);
 
                     break;
                 }
 
-                default:
-                {
+                default: {
                     cloudMesh = new TriangleMeshCloudFlat(
                             pd, terrain.getGeometry(), tp, cp);
 
@@ -269,20 +260,20 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
         // take the progress dialog down
         this.pd.setVisible(false);
 
-        if (this.tmvd == null)
-        {
+        if (this.tmvd == null) {
             this.tmvd = new TriangleMeshViewerDisplay(rp, meshes, this.canvas);
             this.setDisplay(this.tmvd);
-        }
-        else
-        {
+        } else {
             this.tmvd.setMeshes(meshes);
         }
 
         meshChanged();
 
-        this.anim = new FPSAnimator(
-                this.tmvd.getCanvas(), (int) rp.getFpsTarget());
+        // some how this thing is registered before this
+        if (this.anim == null) {
+            this.anim = new FPSAnimator(
+                    this.tmvd.getCanvas(), (int) rp.getFpsTarget());
+        }
 
         this.setVisible(true);
 
@@ -293,10 +284,8 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame
     /**
      * Called when the display is being shut down
      */
-    public void shutdown()
-    {
-        if ((this.anim != null) && this.anim.isAnimating())
-        {
+    public void shutdown() {
+        if ((this.anim != null) && this.anim.isAnimating()) {
             this.anim.stop();
         }
     }

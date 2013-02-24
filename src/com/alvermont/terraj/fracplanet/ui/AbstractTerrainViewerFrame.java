@@ -69,7 +69,7 @@ import com.alvermont.terraj.util.ui.LookAndFeelUtils;
 import com.alvermont.terraj.util.ui.PNGFileFilter;
 import com.alvermont.terraj.util.ui.XMLFileFilter;
 import com.meghnasoft.async.AbstractAsynchronousAction;
-import com.sun.opengl.util.Screenshot;
+import com.jogamp.opengl.util.awt.Screenshot;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;

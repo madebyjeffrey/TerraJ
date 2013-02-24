@@ -55,6 +55,8 @@ import com.alvermont.terraj.fracplanet.geom.SimpleXYZ;
 import com.alvermont.terraj.fracplanet.geom.XYZ;
 import com.alvermont.terraj.fracplanet.geom.XYZMath;
 import javax.media.opengl.GL;
+import javax.media.opengl.GL2;
+import javax.media.opengl.fixedfunc.GLMatrixFunc;
 import javax.media.opengl.glu.GLU;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -76,7 +78,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
     // RequireThis OFF: ROTATE_ARRAY_SIZE
 
     /** The GL object we're using for rendering */
-    private GL gl;
+    private GL2 gl;
 
     /** Our GLU object */
     private GLU glu = new GLU();
@@ -89,7 +91,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
      *
      * @param gl The GL context to be used by the camera
      */
-    public CameraJOGL(GL gl)
+    public CameraJOGL(GL2 gl)
     {
         super();
 
@@ -102,7 +104,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
      * @param gl The GL context to be used by the camera
      * @param position The initial camera position
      */
-    public CameraJOGL(GL gl, CameraPosition position)
+    public CameraJOGL(GL2 gl, CameraPosition position)
     {
         super(position);
 
@@ -120,7 +122,8 @@ public class CameraJOGL extends AbstractCamera implements Camera
     public void rotateAxis(float degrees, float x, float y, float z)
     {
         // Rotate the camera about an arbitary axis (for positioning)
-        this.gl.glRotatef(degrees, x, y, z);
+        this.gl.glRotatef(degrees, x, y, z);  // zzing
+        
     }
 
     /**
@@ -157,14 +160,14 @@ public class CameraJOGL extends AbstractCamera implements Camera
             .setEyeYRotation(getPosition().getEyeYRotation() + dx);
 
         // Rotate about the Up/Down Plane
-        this.gl.glMatrixMode(GL.GL_MODELVIEW);
+        this.gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
         this.gl.glPushMatrix();
 
         this.gl.glLoadIdentity();
         this.gl.glRotatef(
             dy, getEyeNormal().getX(), getEyeNormal().getY(),
             getEyeNormal().getZ());
-        this.gl.glGetFloatv(GL.GL_MODELVIEW_MATRIX, rotate, 0);
+        this.gl.glGetFloatv(GLMatrixFunc.GL_MODELVIEW_MATRIX, rotate, 0);
 
         // MagicNumber OFF
 
@@ -211,7 +214,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
         this.gl.glRotatef(
             dx, getPosition().getUp().getX(), getPosition().getUp().getY(),
             getPosition().getUp().getZ());
-        this.gl.glGetFloatv(GL.GL_MODELVIEW_MATRIX, rotate, 0);
+        this.gl.glGetFloatv(GLMatrixFunc.GL_MODELVIEW_MATRIX, rotate, 0);
         this.gl.glPopMatrix();
 
         newSceneX1 = ((rotate[0] * newSceneX) + (rotate[1] * newSceneY) +
@@ -255,14 +258,14 @@ public class CameraJOGL extends AbstractCamera implements Camera
             .setEyeYRotation(getPosition().getEyeYRotation() + dy);
 
         // Rotate about the Up/Down Plane
-        this.gl.glMatrixMode(GL.GL_MODELVIEW);
+        this.gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
         this.gl.glPushMatrix();
 
         this.gl.glLoadIdentity();
         this.gl.glRotatef(
             dy, getEyeNormal().getX(), getEyeNormal().getY(),
             getEyeNormal().getZ());
-        this.gl.glGetFloatv(GL.GL_MODELVIEW_MATRIX, rotate, 0);
+        this.gl.glGetFloatv(GLMatrixFunc.GL_MODELVIEW_MATRIX, rotate, 0);
 
         // MagicNumber OFF
 
@@ -309,7 +312,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
         this.gl.glRotatef(
             dx, getPosition().getUp().getX(), getPosition().getUp().getY(),
             getPosition().getUp().getZ());
-        this.gl.glGetFloatv(GL.GL_MODELVIEW_MATRIX, rotate, 0);
+        this.gl.glGetFloatv(GLMatrixFunc.GL_MODELVIEW_MATRIX, rotate, 0);
         this.gl.glPopMatrix();
 
         newSceneX1 = ((rotate[0] * newSceneX) + (rotate[1] * newSceneY) +
@@ -340,7 +343,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
         {
             if (isManagePerspective())
             {
-                this.gl.glMatrixMode(GL.GL_PROJECTION);
+                this.gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
                 this.gl.glLoadIdentity();
                 glu.gluPerspective(45.0, 1.0, 1.0, 200.0);
             }
@@ -364,7 +367,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
         final XYZ up = getPosition()
                 .getUp();
 
-        this.gl.glMatrixMode(GL.GL_MODELVIEW);
+        this.gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
         this.gl.glLoadIdentity();
         glu.gluLookAt(
             eye.getX(), eye.getY(), eye.getZ(), centre.getX(), centre.getY(),
@@ -380,11 +383,11 @@ public class CameraJOGL extends AbstractCamera implements Camera
         {
             if (isManagePerspective())
             {
-                this.gl.glMatrixMode(GL.GL_PROJECTION);
+                this.gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
                 this.gl.glLoadIdentity();
             }
 
-            this.gl.glMatrixMode(GL.GL_MODELVIEW);
+            this.gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
             this.gl.glLoadIdentity();
 
             this.cameraOn = false;

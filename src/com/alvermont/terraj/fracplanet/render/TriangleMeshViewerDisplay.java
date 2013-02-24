@@ -66,8 +66,12 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.util.List;
 import javax.media.opengl.GL;
+import javax.media.opengl.GL2;
+import javax.media.opengl.GL2ES1;
+import javax.media.opengl.GL2GL3;
+import javax.media.opengl.fixedfunc.*;
 import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCanvas;
+import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.JComponent;
@@ -161,7 +165,9 @@ public class TriangleMeshViewerDisplay extends JComponent
 
         this.savedCameraPosition = new CameraPosition(campos);
 
-        this.camera = new CameraJOGL(canvas.getGL(), campos);
+        System.out.println("Canvas GetGL: " + canvas.getGL());
+        // zzing casted to get rid of error
+        this.camera = new CameraJOGL((GL2)canvas.getGL(), campos);
 
         canvas.addGLEventListener(this);
     }
@@ -402,7 +408,7 @@ public class TriangleMeshViewerDisplay extends JComponent
     {
         if (displayListIndex != 0)
         {
-            final GL gl = canvas.getGL();
+            final GL2 gl = (GL2)canvas.getGL();
 
             // NVIDIA driver seems to crash when a list is deleted, don't like
             // doing this but it looks like the only way for now given the
@@ -464,13 +470,15 @@ public class TriangleMeshViewerDisplay extends JComponent
      */
     public void init(GLAutoDrawable gLAutoDrawable)
     {
-        final GL gl = gLAutoDrawable.getGL();
+        final GL2 gl = (GL2)gLAutoDrawable.getGL();
         final GLU glu = new GLU();
 
         log.debug("Init GL using: " + gl.getClass().getName());
 
-        gLAutoDrawable.addKeyListener(new MyKeyAdapter());
-
+        // zzing do not add to here! as per http://stackoverflow.com/questions/8465401/why-glautodrawable-doesnt-have-the-method-addmouselistener
+        // need to move it else where
+        //gLAutoDrawable.addKeyListener(new MyKeyAdapter());
+        
         gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         // Switch depth-buffering on
@@ -479,13 +487,13 @@ public class TriangleMeshViewerDisplay extends JComponent
         // Basic lighting stuff (set ambient globally rather than in light)
         final float[] blackLight = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, blackLight, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, blackLight, 0);
-        gl.glEnable(GL.GL_LIGHT0);
-        gl.glEnable(GL.GL_LIGHTING);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_AMBIENT, blackLight, 0);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_SPECULAR, blackLight, 0);
+        gl.glEnable(GLLightingFunc.GL_LIGHT0);
+        gl.glEnable(GLLightingFunc.GL_LIGHTING);
 
         // Do smooth shading 'cos colours are specified at vertices
-        gl.glShadeModel(GL.GL_SMOOTH);
+        gl.glShadeModel(GLLightingFunc.GL_SMOOTH);
 
         // Don't waste time on back-facers
         gl.glFrontFace(GL.GL_CCW);
@@ -493,9 +501,9 @@ public class TriangleMeshViewerDisplay extends JComponent
         gl.glEnable(GL.GL_CULL_FACE);
 
         // Use arrays of data
-        gl.glEnableClientState(GL.GL_VERTEX_ARRAY);
-        gl.glEnableClientState(GL.GL_COLOR_ARRAY);
-        gl.glEnableClientState(GL.GL_NORMAL_ARRAY);
+        gl.glEnableClientState(GLPointerFunc.GL_VERTEX_ARRAY);
+        gl.glEnableClientState(GLPointerFunc.GL_COLOR_ARRAY);
+        gl.glEnableClientState(GLPointerFunc.GL_NORMAL_ARRAY);
 
         log.debug("Init GL complete.");
     }
@@ -514,7 +522,7 @@ public class TriangleMeshViewerDisplay extends JComponent
      */
     public void display(GLAutoDrawable gLAutoDrawable)
     {
-        final GL gl = gLAutoDrawable.getGL();
+        final GL2 gl = (GL2)gLAutoDrawable.getGL();
         final GLU glu = new GLU();
 
         if (parameters.isEnableFog())
@@ -532,19 +540,19 @@ public class TriangleMeshViewerDisplay extends JComponent
 
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
-            gl.glEnable(GL.GL_FOG);
+            gl.glEnable(GL2.GL_FOG);
 
-            gl.glFogi(GL.GL_FOG_MODE, GL.GL_LINEAR);
+            gl.glFogi(GL2.GL_FOG_MODE, GL.GL_LINEAR);
 
-            gl.glFogfv(GL.GL_FOG_COLOR, colBuffer, 0);
-            gl.glFogf(GL.GL_FOG_DENSITY, 0.35f);
-            gl.glFogf(GL.GL_FOG_START, 0.0f);
-            gl.glFogf(GL.GL_FOG_END, parameters.getFogDistance());
+            gl.glFogfv(GL2.GL_FOG_COLOR, colBuffer, 0);
+            gl.glFogf(GL2.GL_FOG_DENSITY, 0.35f);
+            gl.glFogf(GL2.GL_FOG_START, 0.0f);
+            gl.glFogf(GL2.GL_FOG_END, parameters.getFogDistance());
         }
         else
         {
             gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            gl.glDisable(GL.GL_FOG);
+            gl.glDisable(GL2.GL_FOG);
 
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         }
@@ -553,10 +561,10 @@ public class TriangleMeshViewerDisplay extends JComponent
         final float a = parameters.getAmbient();
 
         final float[] globalAmbient = { a, a, a, 1.0f };
-        gl.glLightModelfv(GL.GL_LIGHT_MODEL_AMBIENT, globalAmbient, 0);
+        gl.glLightModelfv(GL2ES1.GL_LIGHT_MODEL_AMBIENT, globalAmbient, 0);
 
         final float[] lightDiffuse = { 1.0f - a, 1.0f - a, 1.0f - a, 1.0f };
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, lightDiffuse, 0);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_DIFFUSE, lightDiffuse, 0);
 
         // position and orient the camera
         getCamera()
@@ -589,7 +597,7 @@ public class TriangleMeshViewerDisplay extends JComponent
         lightPosition[1] = sunpos.getY();
         lightPosition[2] = sunpos.getZ();
 
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPosition, 0);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_POSITION, lightPosition, 0);
 
         final FloatRGBA lightColour = parameters.getSunColour();
 
@@ -598,8 +606,8 @@ public class TriangleMeshViewerDisplay extends JComponent
         lightPosition[2] = lightColour.getB();
         lightPosition[0] = 1.0f;
 
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, lightPosition, 0);
-        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, lightPosition, 0);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_DIFFUSE, lightPosition, 0);
+        gl.glLightfv(GLLightingFunc.GL_LIGHT0, GLLightingFunc.GL_SPECULAR, lightPosition, 0);
 
         objectRotation += objectRotationSpeed;
 
@@ -608,11 +616,11 @@ public class TriangleMeshViewerDisplay extends JComponent
         gl.glRotatef(objectTilt, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(objectRotation, 0.0f, 0.0f, 1.0f);
 
-        int drawMode = GL.GL_FILL;
+        int drawMode = GL2GL3.GL_FILL;
 
         if (parameters.isWireframe())
         {
-            drawMode = GL.GL_LINE;
+            drawMode = GL2GL3.GL_LINE;
         }
 
         // end of mods
@@ -633,7 +641,7 @@ public class TriangleMeshViewerDisplay extends JComponent
             if (buildingList)
             {
                 displayListIndex = gl.glGenLists(1);
-                gl.glNewList(displayListIndex, GL.GL_COMPILE);
+                gl.glNewList(displayListIndex, GL2.GL_COMPILE);
 
                 if (log.isDebugEnabled())
                 {
@@ -645,9 +653,9 @@ public class TriangleMeshViewerDisplay extends JComponent
             final float[] defaultMaterialBlack = { 0.0f, 0.0f, 0.0f };
 
             gl.glMaterialfv(
-                GL.GL_FRONT, GL.GL_AMBIENT_AND_DIFFUSE, defaultMaterialWhite, 0);
+                GL.GL_FRONT, GLLightingFunc.GL_AMBIENT_AND_DIFFUSE, defaultMaterialWhite, 0);
             gl.glMaterialfv(
-                GL.GL_FRONT, GL.GL_EMISSION, defaultMaterialBlack, 0);
+                GL.GL_FRONT, GLLightingFunc.GL_EMISSION, defaultMaterialBlack, 0);
 
             boolean first = true;
 
@@ -686,9 +694,9 @@ public class TriangleMeshViewerDisplay extends JComponent
 
                         // Use "Color Material" mode 'cos everything is the same
                         // material.... just change the colour
-                        gl.glEnable(GL.GL_COLOR_MATERIAL);
+                        gl.glEnable(GLLightingFunc.GL_COLOR_MATERIAL);
                         gl.glColorMaterial(
-                            GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE);
+                            GL.GL_FRONT_AND_BACK, GLLightingFunc.GL_AMBIENT_AND_DIFFUSE);
 
                         // Point GL at arrays of data
                         final FloatBuffer vertBuffer =
@@ -748,7 +756,7 @@ public class TriangleMeshViewerDisplay extends JComponent
                             GL.GL_TRIANGLES, 3 * mesh.getTriangleColour1Count(),
                             GL.GL_UNSIGNED_INT, triBuffer);
 
-                        gl.glDisable(GL.GL_COLOR_MATERIAL);
+                        gl.glDisable(GLLightingFunc.GL_COLOR_MATERIAL);
                     }
                     else
                     {
@@ -810,9 +818,9 @@ public class TriangleMeshViewerDisplay extends JComponent
                                     v.getNormal().getZ());
                                 gl.glMaterialfv(
                                     GL.GL_FRONT_AND_BACK,
-                                    GL.GL_AMBIENT_AND_DIFFUSE, cAmbDiff, 0);
+                                    GLLightingFunc.GL_AMBIENT_AND_DIFFUSE, cAmbDiff, 0);
                                 gl.glMaterialfv(
-                                    GL.GL_FRONT_AND_BACK, GL.GL_EMISSION,
+                                    GL.GL_FRONT_AND_BACK, GLLightingFunc.GL_EMISSION,
                                     cEmissive, 0);
                                 gl.glVertex3f(
                                     v.getPosition().getX(),
@@ -854,7 +862,7 @@ public class TriangleMeshViewerDisplay extends JComponent
     public void reshape(
         GLAutoDrawable gLAutoDrawable, int x, int y, int w, int h)
     {
-        final GL gl = gLAutoDrawable.getGL();
+        final GL2 gl = (GL2)gLAutoDrawable.getGL();
         final GLU glu = new GLU();
 
         log.debug("Viewer GL reshape to: " + w + ", " + h);
@@ -881,7 +889,7 @@ public class TriangleMeshViewerDisplay extends JComponent
         height = h;
 
         gl.glViewport(0, 0, w, h);
-        gl.glMatrixMode(GL.GL_PROJECTION);
+        gl.glMatrixMode(GLMatrixFunc.GL_PROJECTION);
         gl.glLoadIdentity();
 
         double vAngle = 45.0;
@@ -899,7 +907,7 @@ public class TriangleMeshViewerDisplay extends JComponent
         glu.gluPerspective(
             viewAngleDegrees, (float) width / (float) height, 0.01, 10.0);
 
-        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
 
         getCamera()
             .setManagePerspective(false);
@@ -1045,4 +1053,7 @@ public class TriangleMeshViewerDisplay extends JComponent
     {
         return flying;
     }
+    
+    public void dispose(GLAutoDrawable drawable) 
+    {} // zzing  release all opengl resources
 }
