@@ -1,8 +1,17 @@
 Addendum by Jeffrey Drake
 -------------------------
 
+24 Feb 2013
+
 The code as is will not compile and run. It is being updated to do so, but
 on the Mac it does not run with OpenGL as of yet. 
+
+The JOGL libraries were updated to the latest of the 1.1 series to enable the 
+program to run, and compile. It is not compatible with JDK 7 on the Mac.
+
+Next step is to convert to JOGL 2. Probably won't work any better afterwards.
+
+
 
 TerraJ Readme
 -------------
