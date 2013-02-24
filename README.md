@@ -1,3 +1,9 @@
+Addendum by Jeffrey Drake
+-------------------------
+
+The code as is will not compile and run. It is being updated to do so, but
+on the Mac it does not run with OpenGL as of yet. 
+
 TerraJ Readme
 -------------
 
