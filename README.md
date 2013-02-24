@@ -1,23 +1,14 @@
 Addendum by Jeffrey Drake
 -------------------------
 
-23 Feb 2013
+The code has been updated to compile on Java 7, and is verified to work on a Mac
+running Mountain Lion simply by running 'ant' in the directory with build.xml. 
 
-The code as is will not compile and run. It is being updated to do so, but
-on the Mac it does not run with OpenGL as of yet. 
+It now uses JOGL 2 instead of 1.1. There are probably still issues with this, and
+if you are using Java 6, it will have issues but likely due to the project specifying
+7, your milage may vary.
 
-The JOGL libraries were updated to the latest of the 1.1 series to enable the 
-program to run, and compile. It is not compatible with JDK 7 on the Mac.
-
-Next step is to convert to JOGL 2. Probably won't work any better afterwards.
-
-24 Feb 2013
-
-Uses JOGL, issues with creation of GL profile. Expecting some weird interaction.
-
-Works displays image now. I think there are still some significant issues, but 
-displaying is enough.
-
+I hope to test this on other platforms as the opportunity presents itself.
 
 TerraJ Readme
 -------------
