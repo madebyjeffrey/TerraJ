@@ -872,6 +872,7 @@ public class TriangleMeshViewerDisplay extends JComponent
         log.debug("GL_RENDERER: " + gl.glGetString(GL.GL_RENDERER));
         log.debug("GL_VERSION: " + gl.glGetString(GL.GL_VERSION));
 
+        System.out.println(gl);
         // allow for bug???? / unimplemented????? glDeleteList() on linux
         // nvidia driver.
         if (
@@ -909,6 +910,9 @@ public class TriangleMeshViewerDisplay extends JComponent
 
         gl.glMatrixMode(GLMatrixFunc.GL_MODELVIEW);
 
+        ((CameraJOGL)getCamera()).gl = gl;  // zzing hack because camera's context is wrong, can't find
+                                            // where it was set
+        
         getCamera()
             .setManagePerspective(false);
         getCamera()

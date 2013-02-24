@@ -78,7 +78,7 @@ public class CameraJOGL extends AbstractCamera implements Camera
     // RequireThis OFF: ROTATE_ARRAY_SIZE
 
     /** The GL object we're using for rendering */
-    private GL2 gl;
+    public GL2 gl;
 
     /** Our GLU object */
     private GLU glu = new GLU();

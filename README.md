@@ -1,7 +1,7 @@
 Addendum by Jeffrey Drake
 -------------------------
 
-24 Feb 2013
+23 Feb 2013
 
 The code as is will not compile and run. It is being updated to do so, but
 on the Mac it does not run with OpenGL as of yet. 
@@ -11,10 +11,12 @@ program to run, and compile. It is not compatible with JDK 7 on the Mac.
 
 Next step is to convert to JOGL 2. Probably won't work any better afterwards.
 
-25 Feb 2013
+24 Feb 2013
 
 Uses JOGL, issues with creation of GL profile. Expecting some weird interaction.
 
+Works displays image now. I think there are still some significant issues, but 
+displaying is enough.
 
 
 TerraJ Readme

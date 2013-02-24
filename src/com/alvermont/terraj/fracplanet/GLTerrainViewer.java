@@ -153,6 +153,10 @@ public class GLTerrainViewer
     {
         try
         {
+            
+            System.setProperty("sun.java2d.opengl", "false");
+            System.setProperty("sun.java2d.noddraw", "true");
+
             final GLTerrainViewer me = new GLTerrainViewer();
 
             me.run();

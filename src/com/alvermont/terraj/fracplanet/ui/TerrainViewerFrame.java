@@ -164,11 +164,24 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame {
         }
 */
         try {
-//            this.canvas = new GLCanvas(new GLCapabilities(GLProfile.getDefault()));
-            GLProfile glprofile = GLProfile.getDefault();
+            GLProfile glProfile = GLProfile.getDefault();
+            System.out.println(glProfile); 
+            GLCapabilities cap = new GLCapabilities(glProfile);
+            System.out.println(cap);
+            GLCanvas c = new GLCanvas( cap);
+            
+            
+            this.canvas = c; 
+            this.terrainPanel.add(this.canvas);
+            
+            
+//            System.out.println(this.canvas.getGL());
+            
+            //new GLCanvas(new GLCapabilities(GLProfile.getDefault()));
+            /*GLProfile glprofile = GLProfile.getDefault();
             GLCapabilities glcapabilities = new GLCapabilities( glprofile );
             final GLCanvas glcanvas = new GLCanvas( glcapabilities );
-            this.canvas = glcanvas;
+            this.canvas = glcanvas; */
         } catch (Throwable e) {
             // this is fatal
             e.printStackTrace();
@@ -179,7 +192,7 @@ public class TerrainViewerFrame extends AbstractTerrainViewerFrame {
         this.canvas.setPreferredSize(new Dimension(0, 0));
         this.canvas.setMinimumSize(new Dimension(0, 0));
 
-        //canvas.setGL(new DebugGL(canvas.getGL()));
+//        canvas.setGL(new DebugGL(canvas.getGL()));
         final RenderParameters rp = getAllParams()
                 .getRenderParameters();
 
