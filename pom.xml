@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.alvermont.terraj</groupId>
+    <artifactId>terraj</artifactId>
+    <packaging>jar</packaging>
+    <version>0.2-SNAPSHOT</version>
+    <name>TerraJ</name>
+    <url>https://github.com/iaefai/TerraJ</url>
+  
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+        <dependency>
+            <groupId>gnu.getopt</groupId>
+            <artifactId>java-getopt</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+            <artifactId>org.mozilla.javascript</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen</artifactId>
+            <version>2.1.5-01</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.jogamp.jogl</groupId>
+        	<artifactId>jogl</artifactId>
+        	<version>2.1.5-01</version>
+        </dependency> -->
+          <dependency>
+     <groupId>org.jogamp.gluegen</groupId>
+     <artifactId>gluegen-rt-main</artifactId>
+     <version>2.0.2</version>
+   </dependency>
+   <dependency>
+          <groupId>org.jogamp.jogl</groupId>
+     	 <artifactId>jogl-all-main</artifactId>
+    	 <version>2.0.2</version>
+	   </dependency>
+        <dependency>
+        	<groupId>org.swinglabs</groupId>
+        	<artifactId>swing-layout</artifactId>
+        	<version>1.0.3</version>
+        </dependency>
+        <!-- mvn install:install-file -Dfile=rings.jar -DgroupId=rings -DartifactId=rings -Dversion=0.3 -Dpackaging=jar  -->
+        <dependency>
+        	<groupId>rings</groupId>
+        	<artifactId>rings</artifactId>
+        	<version>0.3</version>
+        </dependency>
+    </dependencies>
+</project>
