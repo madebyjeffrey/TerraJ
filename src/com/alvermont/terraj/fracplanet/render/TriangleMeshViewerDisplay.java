@@ -59,7 +59,6 @@ import com.alvermont.terraj.fracplanet.geom.TriangleMesh;
 import com.alvermont.terraj.fracplanet.geom.Vertex;
 import com.alvermont.terraj.fracplanet.geom.XYZ;
 import com.alvermont.terraj.fracplanet.util.ByteBufferUtils;
-import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.nio.Buffer;

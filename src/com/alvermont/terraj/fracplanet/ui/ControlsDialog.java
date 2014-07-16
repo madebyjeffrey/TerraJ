@@ -74,6 +74,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.DefaultComboBoxModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -556,7 +557,7 @@ public class ControlsDialog extends javax.swing.JDialog
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         basicPanel = new javax.swing.JPanel();
-        terrainTypeCombo = new javax.swing.JComboBox();
+        terrainTypeCombo = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         baseHeightSpinner = new javax.swing.JSpinner();
         terrainSeedSpinner = new javax.swing.JSpinner();
@@ -688,6 +689,7 @@ public class ControlsDialog extends javax.swing.JDialog
         jTabbedPane2.addChangeListener(
             new javax.swing.event.ChangeListener()
             {
+                @Override
                 public void stateChanged(javax.swing.event.ChangeEvent evt)
                 {
                     jTabbedPane2StateChanged(evt);
@@ -695,7 +697,7 @@ public class ControlsDialog extends javax.swing.JDialog
             });
 
         terrainTypeCombo.setModel(
-            new javax.swing.DefaultComboBoxModel(
+            new DefaultComboBoxModel<>(
                 new String[]
                 {
                     "Planet", "Hexagonal Terrain", "Square Terrain",
@@ -704,6 +706,7 @@ public class ControlsDialog extends javax.swing.JDialog
         terrainTypeCombo.addActionListener(
             new java.awt.event.ActionListener()
             {
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
                     terrainTypeComboActionPerformed(evt);
@@ -849,6 +852,7 @@ public class ControlsDialog extends javax.swing.JDialog
         vertPeturbSpinner.addChangeListener(
             new javax.swing.event.ChangeListener()
             {
+                @Override
                 public void stateChanged(javax.swing.event.ChangeEvent evt)
                 {
                     vertPeturbSpinnerStateChanged(evt);
@@ -859,6 +863,7 @@ public class ControlsDialog extends javax.swing.JDialog
         horizPeturbSpinner.addChangeListener(
             new javax.swing.event.ChangeListener()
             {
+                @Override
                 public void stateChanged(javax.swing.event.ChangeEvent evt)
                 {
                     horizPeturbSpinnerStateChanged(evt);
@@ -877,6 +882,7 @@ public class ControlsDialog extends javax.swing.JDialog
         jButton2.addActionListener(
             new java.awt.event.ActionListener()
             {
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
                     jButton2ActionPerformed(evt);
@@ -3289,7 +3295,7 @@ public class ControlsDialog extends javax.swing.JDialog
     private javax.swing.JButton sunlightButton;
     private javax.swing.ButtonGroup terrainButtonGroup;
     private javax.swing.JSpinner terrainSeedSpinner;
-    private javax.swing.JComboBox terrainTypeCombo;
+    private javax.swing.JComboBox<String> terrainTypeCombo;
     private javax.swing.JLabel trianglesLabel;
     private javax.swing.JSpinner unperturbedSpinner;
     private javax.swing.JSpinner vertPeturbSpinner;

@@ -51,7 +51,6 @@
 package com.alvermont.terraj.planet.io;
 
 import com.alvermont.terraj.planet.project.Projector;
-import com.sun.corba.se.impl.ior.ByteBuffer;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
@@ -104,7 +103,13 @@ public class ImageBuilder
                 .getProjectionParameters()
                 .getWidth();
 
-        final ByteBuffer buff = new ByteBuffer(width * height * 3);
+        /* Changed to byte[] to eliminate use of internal api
+            June 16, 2014: Jeffrey Drake - must still test
+        */
+        
+//        final ByteBuffer buff = new ByteBuffer(width * height * 3);
+        final byte[] buff = new byte[width * height * 3];
+        int index = 0;
 
         final int[] col = new int[3];
 
@@ -114,13 +119,17 @@ public class ImageBuilder
             {
                 proj.fillRGB(i, j, col);
 
-                buff.append((byte) (col[0]));
-                buff.append((byte) (col[1]));
-                buff.append((byte) (col[2]));
+                buff[index++] = (byte)col[0];
+                buff[index++] = (byte)col[1];
+                buff[index++] = (byte)col[2];
+//                buff.append((byte) (col[0]));
+//                buff.append((byte) (col[1]));
+//                buff.append((byte) (col[2]));
             }
         }
 
-        return buff.toArray();
+//        return buff.toArray();
+        return buff;
     }
 
     /**

@@ -557,7 +557,7 @@ public class MainFrame extends javax.swing.JFrame
      */
     protected void setListModel()
     {
-        final DefaultComboBoxModel dcm = new DefaultComboBoxModel();
+        final DefaultComboBoxModel<Projector> dcm = new DefaultComboBoxModel<>();
 
         for (Projector p : projManager.getProjections())
         {
@@ -585,7 +585,7 @@ public class MainFrame extends javax.swing.JFrame
         jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         projPanel = new javax.swing.JPanel();
-        projComboBox = new javax.swing.JComboBox();
+        projComboBox = new javax.swing.JComboBox<Projector>();
         jLabel1 = new javax.swing.JLabel();
         latSpinner = new javax.swing.JSpinner();
         lonSpinner = new javax.swing.JSpinner();
@@ -1982,7 +1982,7 @@ public class MainFrame extends javax.swing.JFrame
     private javax.swing.JPanel outputJPanel;
     private javax.swing.JButton peakColourButton;
     private javax.swing.JLabel previewLabel;
-    private javax.swing.JComboBox projComboBox;
+    private javax.swing.JComboBox<Projector> projComboBox;
     private javax.swing.JPanel projPanel;
     private javax.swing.JButton randomAllButton;
     private javax.swing.JButton randomAllColourButton;
