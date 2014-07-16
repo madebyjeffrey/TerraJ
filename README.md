@@ -1,3 +1,21 @@
+Latest updated July 16, 2014:
+
+I have added maven support and it compiles with Java 8. To use maven you must run:
+
+   mvn install:install-file -Dfile=rings.jar -DgroupId=rings -DartifactId=rings -Dversion=0.3 -Dpackaging=jar
+
+As it is the only library that does not come from the repositories. It is my goal in the near
+future to remove the Netbeans/ant project, and rely exclusively on maven.
+
+The maven build tested so far on MacOS X 10.9 does not work with OpenGL properly. But the other
+two modules work.
+
+To compile: 
+
+   mvn package
+	
+It will produce a target/terraj folder with a bin and lib directory with launchers.
+
 Addendum by Jeffrey Drake
 -------------------------
 
