@@ -68,7 +68,6 @@ import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -540,7 +539,7 @@ public class MainFrame extends javax.swing.JFrame
      *
      * @param box The <code>JComboBox</code> to be set up
      */
-    protected void setComboNumericEditor(JComboBox box)
+    protected void setComboNumericEditor(JComboBox<? extends String> box)
     {
         final ComboBoxEditor editor = box.getEditor();
         final Component editorComponent = editor.getEditorComponent();
@@ -608,8 +607,8 @@ public class MainFrame extends javax.swing.JFrame
         outputJPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        widthComboBox = new javax.swing.JComboBox();
-        heightComboBox = new javax.swing.JComboBox();
+        widthComboBox = new javax.swing.JComboBox<String>();
+        heightComboBox = new javax.swing.JComboBox<String>();
         reverseCheckbox = new javax.swing.JCheckBox();
         jLabel18 = new javax.swing.JLabel();
         scaleSpinner = new javax.swing.JSpinner();
@@ -671,7 +670,6 @@ public class MainFrame extends javax.swing.JFrame
 
         jTabbedPane1.setToolTipText("");
         projPanel.setRequestFocusEnabled(false);
-        projComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         projComboBox.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -871,7 +869,7 @@ public class MainFrame extends javax.swing.JFrame
         jLabel7.setText("Output height in pixels");
 
         widthComboBox.setEditable(true);
-        widthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320", "640", "800", "1024", "1280", "1600" }));
+        widthComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "320", "640", "800", "1024", "1280", "1600" }));
         widthComboBox.setSelectedIndex(2);
         widthComboBox.addActionListener(new java.awt.event.ActionListener()
         {
@@ -882,15 +880,15 @@ public class MainFrame extends javax.swing.JFrame
         });
 
         heightComboBox.setEditable(true);
-        heightComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "200", "480", "600", "1024", "1200" }));
+        heightComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "200", "480", "600", "1024", "1200" }));
         heightComboBox.setSelectedIndex(2);
-        heightComboBox.addActionListener(new java.awt.event.ActionListener()
+        heightComboBox.addActionListener(evt -> heightComboBoxActionPerformed(evt)); /*new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 heightComboBoxActionPerformed(evt);
             }
-        });
+        });*/
 
         reverseCheckbox.setText("Reverse the background on the output");
         reverseCheckbox.setToolTipText("If selected will invert the background colour");
@@ -1936,7 +1934,7 @@ public class MainFrame extends javax.swing.JFrame
     private javax.swing.JCheckBox edgesCheckbox;
     private javax.swing.JMenuItem exitItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JComboBox heightComboBox;
+    private JComboBox<String> heightComboBox;
     private javax.swing.JCheckBox heightfieldCheckbox;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JSpinner hgridSpinner;
@@ -2006,6 +2004,6 @@ public class MainFrame extends javax.swing.JFrame
     private javax.swing.JButton shoreColourButton;
     private javax.swing.JButton spaceColourButton;
     private javax.swing.JSpinner vgridSpinner;
-    private javax.swing.JComboBox widthComboBox;
+    private JComboBox<String> widthComboBox;
     // End of variables declaration//GEN-END:variables
 }

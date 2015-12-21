@@ -51,7 +51,6 @@
 
 package com.alvermont.terraj.stargen.ui;
 
-import com.alvermont.terraj.fracplanet.AllFracplanetParameters;
 import com.alvermont.terraj.fracplanet.io.FileUtils;
 import com.alvermont.terraj.stargen.Display;
 import com.alvermont.terraj.stargen.GenStar;
@@ -70,12 +69,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -122,8 +117,8 @@ public class StargenFrame extends javax.swing.JFrame
      * @param state The new state to set the checkbox to
      * @param value The value to store in the combo box
      */
-    protected void updateCombo(JCheckBox component1, JComboBox component2, 
-                boolean state, String value)
+    protected void updateCombo(JCheckBox component1, JComboBox<String> component2,
+                               boolean state, String value)
     {
         component1.setSelected(state);
         component2.setEnabled(state);
@@ -221,7 +216,7 @@ public class StargenFrame extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents()
     {
-        generateButton = new javax.swing.JButton();
+        generateButton = new JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         nameCheckbox = new javax.swing.JCheckBox();
@@ -238,9 +233,9 @@ public class StargenFrame extends javax.swing.JFrame
         classCheckbox = new javax.swing.JCheckBox();
         subclassCheckbox = new javax.swing.JCheckBox();
         lumClassCheckbox = new javax.swing.JCheckBox();
-        classCombo = new javax.swing.JComboBox();
-        subclassCombo = new javax.swing.JComboBox();
-        lumClassCombo = new javax.swing.JComboBox();
+        classCombo = new JComboBox<String>();
+        subclassCombo = new JComboBox<String>();
+        lumClassCombo = new JComboBox<String>();
         jPanel3 = new javax.swing.JPanel();
         distanceCheckbox = new javax.swing.JCheckBox();
         ascensionCheckbox = new javax.swing.JCheckBox();
@@ -372,7 +367,7 @@ public class StargenFrame extends javax.swing.JFrame
             }
         });
 
-        seedSpinner.setModel(new SpinnerNumberModel((Number) new Long(0L), (Comparable) new Long(0L), (Comparable) Long.MAX_VALUE, (Number) new Long(1)));
+        seedSpinner.setModel(new SpinnerNumberModel((Number) new Long(0L), (Comparable<Long>) new Long(0L), (Comparable) Long.MAX_VALUE, (Number) new Long(1)));
         seedSpinner.setToolTipText("Select a specific seed value. The same seed always generates the same result");
         seedSpinner.addChangeListener(new javax.swing.event.ChangeListener()
         {
@@ -469,7 +464,7 @@ public class StargenFrame extends javax.swing.JFrame
             }
         });
 
-        classCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O", "B", "A", "F", "G", "K", "M" }));
+        classCombo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "O", "B", "A", "F", "G", "K", "M" }));
         classCombo.setToolTipText("Select the spectral class of the star. O is the hottest.");
         classCombo.addActionListener(new java.awt.event.ActionListener()
         {
@@ -479,7 +474,7 @@ public class StargenFrame extends javax.swing.JFrame
             }
         });
 
-        subclassCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        subclassCombo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         subclassCombo.setToolTipText("Select the spectral subclass of the star");
         subclassCombo.addActionListener(new java.awt.event.ActionListener()
         {
@@ -489,7 +484,7 @@ public class StargenFrame extends javax.swing.JFrame
             }
         });
 
-        lumClassCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ia", "Ib", "II", "III", "IV", "V", "VI", "VII" }));
+        lumClassCombo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Ia", "Ib", "II", "III", "IV", "V", "VI", "VII" }));
         lumClassCombo.setToolTipText("Select the luminosity class of the star");
         lumClassCombo.addActionListener(new java.awt.event.ActionListener()
         {
@@ -1165,7 +1160,7 @@ public class StargenFrame extends javax.swing.JFrame
     private javax.swing.JCheckBox ascensionCheckbox;
     private javax.swing.JSpinner ascensionSpinner;
     private javax.swing.JCheckBox classCheckbox;
-    private javax.swing.JComboBox classCombo;
+    private JComboBox<String> classCombo;
     private javax.swing.JCheckBox declinationCheckbox;
     private javax.swing.JSpinner declinationSpinner;
     private javax.swing.JCheckBox distanceCheckbox;
@@ -1185,7 +1180,7 @@ public class StargenFrame extends javax.swing.JFrame
     private javax.swing.JMenuItem loadMenuItem;
     private javax.swing.JCheckBox lumCheckbox;
     private javax.swing.JCheckBox lumClassCheckbox;
-    private javax.swing.JComboBox lumClassCombo;
+    private JComboBox<String> lumClassCombo;
     private javax.swing.JSpinner lumSpinner;
     private javax.swing.JCheckBox massCheckbox;
     private javax.swing.JSpinner massSpinner;
@@ -1196,7 +1191,7 @@ public class StargenFrame extends javax.swing.JFrame
     private javax.swing.JCheckBox seedCheckbox;
     private javax.swing.JSpinner seedSpinner;
     private javax.swing.JCheckBox subclassCheckbox;
-    private javax.swing.JComboBox subclassCombo;
+    private JComboBox<String> subclassCombo;
     // End of variables declaration//GEN-END:variables
     
 }

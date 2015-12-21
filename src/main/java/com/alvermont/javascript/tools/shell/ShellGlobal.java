@@ -290,13 +290,15 @@ public class ShellGlobal extends ImporterTopLevel
      *            class causes this exception in ScriptableObject.defineClass
      * @see org.mozilla.javascript.ScriptableObject#defineClass
      */
+    @SuppressWarnings (value="unchecked")
     public static void defineClass(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
         throws IllegalAccessException, InstantiationException, 
             InvocationTargetException
     {
-        final Class clazz = getClass(args);
-        ScriptableObject.defineClass(thisObj, clazz);
+            final Class clazz = getClass(args);
+            ScriptableObject.defineClass(thisObj, clazz);
+
     }
 
     /**
@@ -386,7 +388,7 @@ public class ShellGlobal extends ImporterTopLevel
         out.close();
     }
 
-    public static Object deserialize(
+    public static Scriptable deserialize(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
         throws IOException, ClassNotFoundException
     {
@@ -418,7 +420,7 @@ public class ShellGlobal extends ImporterTopLevel
      * js> a
      * 3
      */
-    public static Object spawn(
+    public static Thread spawn(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
     {
         final Scriptable scope = funObj.getParentScope();
@@ -477,7 +479,7 @@ public class ShellGlobal extends ImporterTopLevel
      * entry
      * exit
      */
-    public static Object sync(
+    public static Synchronizer sync(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
     {
         if (args.length == 1 && args[0] instanceof Function)
@@ -525,7 +527,7 @@ public class ShellGlobal extends ImporterTopLevel
      *   value of the err property.
      * </ul>
      */
-    public static Object runCommand(
+    public static Integer runCommand(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
         throws IOException
     {
@@ -754,7 +756,7 @@ public class ShellGlobal extends ImporterTopLevel
      * The first form converts file's context to string using the default
      * character coding.
      */
-    public static Object readFile(
+    public static String readFile(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
         throws IOException
     {
@@ -788,7 +790,7 @@ public class ShellGlobal extends ImporterTopLevel
      * The first form converts file's context to string using the default
      * charCoding.
      */
-    public static Object readUrl(
+    public static String readUrl(
         Context cx, Scriptable thisObj, Object[] args, Function funObj)
         throws IOException
     {
