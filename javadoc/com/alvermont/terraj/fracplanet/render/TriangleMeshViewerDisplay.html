@@ -96,11 +96,11 @@ java.lang.Object
               <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>com.alvermont.terraj.fracplanet.render.TriangleMeshViewerDisplay</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.awt.image.ImageObserver, java.awt.MenuContainer, java.io.Serializable, java.util.EventListener, javax.media.opengl.GLEventListener</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.awt.image.ImageObserver, java.awt.MenuContainer, java.io.Serializable, java.util.EventListener, com.jogamp.opengl.GLEventListener</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>TriangleMeshViewerDisplay</B><DT>extends javax.swing.JComponent<DT>implements javax.media.opengl.GLEventListener</DL>
+<DT><PRE>public class <B>TriangleMeshViewerDisplay</B><DT>extends javax.swing.JComponent<DT>implements com.jogamp.opengl.GLEventListener</DL>
 </PRE>
 
 <P>
@@ -210,9 +210,9 @@ Class that displays a mesh using JOGL rendering.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#TriangleMeshViewerDisplay(com.alvermont.terraj.fracplanet.RenderParameters, java.util.List, javax.media.opengl.GLCanvas)">TriangleMeshViewerDisplay</A></B>(<A HREF="../../../../../com/alvermont/terraj/fracplanet/RenderParameters.html" title="class in com.alvermont.terraj.fracplanet">RenderParameters</A>&nbsp;param,
+<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#TriangleMeshViewerDisplay(com.alvermont.terraj.fracplanet.RenderParameters, java.util.List, com.jogamp.opengl.GLCanvas)">TriangleMeshViewerDisplay</A></B>(<A HREF="../../../../../com/alvermont/terraj/fracplanet/RenderParameters.html" title="class in com.alvermont.terraj.fracplanet">RenderParameters</A>&nbsp;param,
                           java.util.List&lt;<A HREF="../../../../../com/alvermont/terraj/fracplanet/geom/TriangleMesh.html" title="interface in com.alvermont.terraj.fracplanet.geom">TriangleMesh</A>&gt;&nbsp;meshes,
-                          javax.media.opengl.GLCanvas&nbsp;canvas)</CODE>
+                          com.jogamp.opengl.GLCanvas&nbsp;canvas)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of TriangleMeshViewerDisplay</TD>
@@ -238,7 +238,7 @@ Class that displays a mesh using JOGL rendering.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#display(javax.media.opengl.GLAutoDrawable)">display</A></B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</CODE>
+<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#display(com.jogamp.opengl.GLAutoDrawable)">display</A></B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to display a frame.</TD>
@@ -246,7 +246,7 @@ Class that displays a mesh using JOGL rendering.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#displayChanged(javax.media.opengl.GLAutoDrawable, boolean, boolean)">displayChanged</A></B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
+<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#displayChanged(com.jogamp.opengl.GLAutoDrawable, boolean, boolean)">displayChanged</A></B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
                boolean&nbsp;b,
                boolean&nbsp;b0)</CODE>
 
@@ -300,7 +300,7 @@ Class that displays a mesh using JOGL rendering.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;javax.media.opengl.GLCanvas</CODE></FONT></TD>
+<CODE>&nbsp;com.jogamp.opengl.GLCanvas</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#getCanvas()">getCanvas</A></B>()</CODE>
 
 <BR>
@@ -325,7 +325,7 @@ Class that displays a mesh using JOGL rendering.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#init(javax.media.opengl.GLAutoDrawable)">init</A></B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</CODE>
+<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#init(com.jogamp.opengl.GLAutoDrawable)">init</A></B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initialize our use of JOGL.</TD>
@@ -341,7 +341,7 @@ Class that displays a mesh using JOGL rendering.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#reshape(javax.media.opengl.GLAutoDrawable, int, int, int, int)">reshape</A></B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
+<TD><CODE><B><A HREF="../../../../../com/alvermont/terraj/fracplanet/render/TriangleMeshViewerDisplay.html#reshape(com.jogamp.opengl.GLAutoDrawable, int, int, int, int)">reshape</A></B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
         int&nbsp;x,
         int&nbsp;y,
         int&nbsp;w,
@@ -448,12 +448,12 @@ Class that displays a mesh using JOGL rendering.
 </TR>
 </TABLE>
 
-<A NAME="TriangleMeshViewerDisplay(com.alvermont.terraj.fracplanet.RenderParameters, java.util.List, javax.media.opengl.GLCanvas)"><!-- --></A><H3>
+<A NAME="TriangleMeshViewerDisplay(com.alvermont.terraj.fracplanet.RenderParameters, java.util.List, com.jogamp.opengl.GLCanvas)"><!-- --></A><H3>
 TriangleMeshViewerDisplay</H3>
 <PRE>
 public <B>TriangleMeshViewerDisplay</B>(<A HREF="../../../../../com/alvermont/terraj/fracplanet/RenderParameters.html" title="class in com.alvermont.terraj.fracplanet">RenderParameters</A>&nbsp;param,
                                  java.util.List&lt;<A HREF="../../../../../com/alvermont/terraj/fracplanet/geom/TriangleMesh.html" title="interface in com.alvermont.terraj.fracplanet.geom">TriangleMesh</A>&gt;&nbsp;meshes,
-                                 javax.media.opengl.GLCanvas&nbsp;canvas)</PRE>
+                                 com.jogamp.opengl.GLCanvas&nbsp;canvas)</PRE>
 <DL>
 <DD>Creates a new instance of TriangleMeshViewerDisplay
 <P>
@@ -560,16 +560,16 @@ public void <B>drawFrame</B>(<A HREF="../../../../../com/alvermont/terraj/fracpl
 </DL>
 <HR>
 
-<A NAME="init(javax.media.opengl.GLAutoDrawable)"><!-- --></A><H3>
+<A NAME="init(com.jogamp.opengl.GLAutoDrawable)"><!-- --></A><H3>
 init</H3>
 <PRE>
-public void <B>init</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</PRE>
+public void <B>init</B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</PRE>
 <DL>
 <DD>Initialize our use of JOGL. We set up the client state ready to begin
  rendering.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>init</CODE> in interface <CODE>javax.media.opengl.GLEventListener</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>init</CODE> in interface <CODE>com.jogamp.opengl.GLEventListener</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>gLAutoDrawable</CODE> - The drawable that will be used for output</DL>
@@ -577,16 +577,16 @@ public void <B>init</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</
 </DL>
 <HR>
 
-<A NAME="display(javax.media.opengl.GLAutoDrawable)"><!-- --></A><H3>
+<A NAME="display(com.jogamp.opengl.GLAutoDrawable)"><!-- --></A><H3>
 display</H3>
 <PRE>
-public void <B>display</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</PRE>
+public void <B>display</B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable)</PRE>
 <DL>
 <DD>Called to display a frame. This carries out the rendering of the scene
  using the drawable object.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>display</CODE> in interface <CODE>javax.media.opengl.GLEventListener</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>display</CODE> in interface <CODE>com.jogamp.opengl.GLEventListener</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>gLAutoDrawable</CODE> - The GL drawable object that is to be used for
@@ -595,10 +595,10 @@ public void <B>display</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable
 </DL>
 <HR>
 
-<A NAME="reshape(javax.media.opengl.GLAutoDrawable, int, int, int, int)"><!-- --></A><H3>
+<A NAME="reshape(com.jogamp.opengl.GLAutoDrawable, int, int, int, int)"><!-- --></A><H3>
 reshape</H3>
 <PRE>
-public void <B>reshape</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
+public void <B>reshape</B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
                     int&nbsp;x,
                     int&nbsp;y,
                     int&nbsp;w,
@@ -607,7 +607,7 @@ public void <B>reshape</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable
 <DD>Called when the GL drawable has been resized
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>reshape</CODE> in interface <CODE>javax.media.opengl.GLEventListener</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>reshape</CODE> in interface <CODE>com.jogamp.opengl.GLEventListener</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>gLAutoDrawable</CODE> - The drawable being used for rendering<DD><CODE>x</CODE> - The new x coordinate of the drawable<DD><CODE>y</CODE> - The new y coordinate of the drawable<DD><CODE>w</CODE> - The new width of the drawable<DD><CODE>h</CODE> - The new height of the drawable</DL>
@@ -615,10 +615,10 @@ public void <B>reshape</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable
 </DL>
 <HR>
 
-<A NAME="displayChanged(javax.media.opengl.GLAutoDrawable, boolean, boolean)"><!-- --></A><H3>
+<A NAME="displayChanged(com.jogamp.opengl.GLAutoDrawable, boolean, boolean)"><!-- --></A><H3>
 displayChanged</H3>
 <PRE>
-public void <B>displayChanged</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
+public void <B>displayChanged</B>(com.jogamp.opengl.GLAutoDrawable&nbsp;gLAutoDrawable,
                            boolean&nbsp;b,
                            boolean&nbsp;b0)</PRE>
 <DL>
@@ -626,7 +626,7 @@ public void <B>displayChanged</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoD
  changed.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>displayChanged</CODE> in interface <CODE>javax.media.opengl.GLEventListener</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>displayChanged</CODE> in interface <CODE>com.jogamp.opengl.GLEventListener</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>gLAutoDrawable</CODE> - The drawable object we're using<DD><CODE>b</CODE> - <pre>true</pre> if there has been a display mode change else
@@ -639,7 +639,7 @@ public void <B>displayChanged</B>(javax.media.opengl.GLAutoDrawable&nbsp;gLAutoD
 <A NAME="getCanvas()"><!-- --></A><H3>
 getCanvas</H3>
 <PRE>
-public javax.media.opengl.GLCanvas <B>getCanvas</B>()</PRE>
+public com.jogamp.opengl.GLCanvas <B>getCanvas</B>()</PRE>
 <DL>
 <DD>Getter for property canvas.
 <P>

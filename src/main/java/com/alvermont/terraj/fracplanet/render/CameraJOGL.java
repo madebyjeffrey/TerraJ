@@ -54,10 +54,10 @@ package com.alvermont.terraj.fracplanet.render;
 import com.alvermont.terraj.fracplanet.geom.SimpleXYZ;
 import com.alvermont.terraj.fracplanet.geom.XYZ;
 import com.alvermont.terraj.fracplanet.geom.XYZMath;
-import javax.media.opengl.GL;
-import javax.media.opengl.GL2;
-import javax.media.opengl.fixedfunc.GLMatrixFunc;
-import javax.media.opengl.glu.GLU;
+import com.jogamp.opengl.GL;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
+import com.jogamp.opengl.glu.GLU;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

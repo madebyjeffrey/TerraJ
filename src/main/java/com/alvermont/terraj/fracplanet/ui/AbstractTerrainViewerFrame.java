@@ -70,6 +70,8 @@ import com.alvermont.terraj.util.ui.PNGFileFilter;
 import com.alvermont.terraj.util.ui.XMLFileFilter;
 import com.meghnasoft.async.AbstractAsynchronousAction;
 import com.jogamp.opengl.util.awt.Screenshot;
+//import com.jogamp.opengl.awt.Screenshot;
+//import com.jogamp.opengl.util.awt.Screenshot;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
